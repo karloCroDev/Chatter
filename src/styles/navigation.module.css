@@ -1,0 +1,20 @@
+.ul {
+  display: flex;
+  align-items: center;
+  height: 140px;
+  border-bottom: 2px solid rgba(47, 47, 55, 0.799);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.title {
+  font-family: "Pacifico", cursive;
+  font-size: 55px;
+  margin-left: -5px;
+}
+.img {
+  width: 70px;
+  margin-left: 25px;
+}
