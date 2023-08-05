@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react"
 import { UserContext } from "./FirebaseManagment"
 import chatStyle from "../styles/chat.module.css"
 import sendMessage from "../assets/send.png"
-
+import searhIcon from "../assets/search.png"
 export const Chat = () => {
   const {
     user,
@@ -17,6 +17,9 @@ export const Chat = () => {
   const [getUserDoc, setGetUserDoc] = useState("")
   const [displayContainer, setDisplayContainer] = useState(false)
   const inputValue = useRef()
+  ///search section
+  const searchValue = useRef()
+  const [search, setSearch] = useState("")
 
   const getUser = (index, id) => {
     setDisplayBackgroundColor(index)
@@ -27,15 +30,17 @@ export const Chat = () => {
       <img src={image ? image : null} alt="" />
       <div className={chatStyle.container}>
         <aside>
-          {/* <ul>
-            <li>
-              <div className={chatStyle.imgDiv}></div>
-            </li>
-            <li>
-              <span>{user[0].toUpperCase() + user.slice(1)}</span>
-              {/* this should not be user  */}
-          {/* </li>
-          </ul> */}
+          <article className={chatStyle.searchContainer}>
+            <label htmlFor="searchBar">Search for your friends:</label>
+            <div>
+              <input type="text" id="searchBar" ref={searchValue} />
+              <img
+                src={searhIcon}
+                alt="search button"
+                onClick={() => setSearch(searchValue.current.value)}
+              />
+            </div>
+          </article>
           {getUsers
             ? getUsers.map((usersData, i) => {
                 return (
@@ -51,11 +56,17 @@ export const Chat = () => {
                         setDisplayContainer(true)
                         getReciever(usersData.usernameDoc)
                       }}
-                      className={
+                      className={`${
                         displayBackroundColor === i
                           ? chatStyle.bgColor
                           : chatStyle.standardBg
-                      }
+                      } ${
+                        usersData.usernameDoc
+                          .toLowerCase()
+                          .includes(search.toLowerCase())
+                          ? chatStyle.display
+                          : chatStyle.hide
+                      }`}
                     >
                       <div className={chatStyle.imgDiv}></div>
                       {/* Put image instead of the the divs this is for demo only */}

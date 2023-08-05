@@ -63,6 +63,33 @@
   font-size: 50px;
   margin-left: 20px;
 }
+.searchContainer {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.searchContainer div {
+  width: 80%;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+.searchContainer label {
+  font-size: 30px;
+}
+.searchContainer input {
+  all: unset;
+  background-color: rgba(47, 47, 55, 0.799);
+  width: 85%;
+  margin-left: 20px;
+}
+.searchContainer img {
+  width: 25px;
+}
 nav ul > div {
   margin-left: auto;
   width: 200px;
@@ -141,4 +168,10 @@ nav ul div span {
   margin-left: auto;
   background-color: rgba(47, 47, 55, 0.799);
   margin-right: 20px;
+}
+.hide {
+  display: none !important;
+}
+.display {
+  display: block;
 }

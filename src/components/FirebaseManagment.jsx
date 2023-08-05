@@ -44,29 +44,36 @@ export const FirebaseManagment = ({ children }) => {
       where("relation", "in", [relationVar, relationVarReversed])
     )
 
-    const snapshot = await getDocs(q)
+    onSnapshot(q, (snapshot) => {
+      if (snapshot.size > 0) {
+        filterUsers(snapshot)
+      } else {
+        noConversation()
+      }
+    })
 
-    if (snapshot.size > 0) {
-      filterUsers(snapshot)
-      return
-    }
+    // if (snapshot.size > 0) {
+    //   filterUsers(snapshot)
+    //   return
+    // }
+    async function noConversation() {
+      try {
+        await addDoc(conversationRef, {
+          content: [
+            // { message: "Hello world", sender: user },
+            // { message: "Hello world Two", sender: rec },
+          ],
+          relation: relationVar,
+        })
 
-    try {
-      await addDoc(conversationRef, {
-        content: [
-          // { message: "Hello world", sender: user },
-          // { message: "Hello world Two", sender: rec },
-        ],
-        relation: relationVar,
-      })
+        const q2 = query(conversationRef, where("relation", "==", relationVar))
 
-      const q2 = query(conversationRef, where("relation", "==", relationVar))
-
-      onSnapshot(q2, (doc) => {
-        filterUsers(doc)
-      })
-    } catch (error) {
-      console.error(error)
+        onSnapshot(q2, (doc) => {
+          filterUsers(doc)
+        })
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 

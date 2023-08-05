@@ -20,7 +20,7 @@ export function Navigation() {
             <img src={Icon} alt="logo" className={NavigationStyle.img} />
           </li>
           {user ? (
-            <div>
+            <div style={{ marginRight: "100px" }}>
               <li>
                 <div className={chatStyle.imgDiv}></div>
               </li>
@@ -28,7 +28,6 @@ export function Navigation() {
                 <span>
                   {user ? user[0].toUpperCase() + user.slice(1) : null}
                 </span>
-                {/* this should not be user  */}
               </li>
               <li>
                 <img
@@ -51,7 +50,8 @@ export function Navigation() {
       Not this <a target="_blank" href="https://icons8.com/icon/11816/add-image">add photo</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
       <a target="_blank" href="https://icons8.com/icon/54234/add-image">add photo</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a><a target="_blank" href="https://icons8.com/icon/VTOU0AOwSnkY/logout">sign out</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
       <a target="_blank" href="https://icons8.com/icon/60700/sent">Sent</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-      <a target="_blank" href="https://icons8.com/icon/60700/sent">Sent</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>*/}
+      <a target="_blank" href="https://icons8.com/icon/60700/sent">Sent</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/132/search">Search</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>*/}
     </>
   )
 }
