@@ -81,48 +81,60 @@ export const Chat = () => {
             : null}
         </aside>
         <main>
-          <ul>
-            <li>
-              <div className={chatStyle.imgDiv}></div>
-              {/* change image as soon as possible  */}
-            </li>
-            <li>
-              <span>
-                {displayContainer ? getUserDoc : "Please select user to chat "}
-              </span>
-              {/* this should not be user  */}
-            </li>
-          </ul>
-          <div className={chatStyle.chattingContainer}>
-            <ul>
-              {getMessages
-                ? getMessages[0].content.map((x) => (
-                    <li
-                      className={
-                        x.sender === user
-                          ? chatStyle.leftMessage
-                          : chatStyle.rightMessage
-                      }
-                    >
-                      {x.message}
-                    </li>
-                  ))
-                : null}
-            </ul>
-            <div className={chatStyle.sendMessage}>
-              <input
-                type="text"
-                placeholder="Enter your message..."
-                ref={inputValue}
-              />
-              <button
-                className={chatStyle.sendMessageFalse}
-                onClick={() => messageFunc(inputValue.current.value)}
-              >
-                <img src={sendMessage} alt="send button" />
-              </button>
+          {displayContainer ? (
+            <>
+              <ul>
+                <li>
+                  <div className={chatStyle.imgDiv}></div>
+                  {/* change image as soon as possible  */}
+                </li>
+                <li>
+                  <span>{getUserDoc}</span>
+                  {/* this should not be user  */}
+                </li>
+              </ul>
+              <div className={chatStyle.chattingContainer}>
+                <ul>
+                  {getMessages
+                    ? getMessages[0].content.map((x) => (
+                        <li
+                          className={
+                            x.sender === user
+                              ? chatStyle.leftMessage
+                              : chatStyle.rightMessage
+                          }
+                        >
+                          {x.message}
+                        </li>
+                      ))
+                    : null}
+                </ul>
+                <div className={chatStyle.sendMessage}>
+                  <input
+                    type="text"
+                    placeholder="Enter your message..."
+                    ref={inputValue}
+                  />
+                  <button
+                    className={chatStyle.sendMessageFalse}
+                    onClick={() => messageFunc(inputValue.current.value)}
+                  >
+                    <img src={sendMessage} alt="send button" />
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "50px",
+                lineHeight: "calc(100vh - 140px)",
+              }}
+            >
+              Please select user to start chatting
             </div>
-          </div>
+          )}
         </main>
       </div>
     </>

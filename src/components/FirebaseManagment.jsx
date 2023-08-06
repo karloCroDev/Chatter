@@ -52,10 +52,6 @@ export const FirebaseManagment = ({ children }) => {
       }
     })
 
-    // if (snapshot.size > 0) {
-    //   filterUsers(snapshot)
-    //   return
-    // }
     async function noConversation() {
       try {
         await addDoc(conversationRef, {

@@ -39,7 +39,7 @@ export const SignInPage = () => {
               <span>Password:</span>
             </label>
             <input
-              type="text"
+              type="password"
               id="input2"
               placeholder="Enter your password..."
               onChange={(e) => setPassowrd(e.target.value)}
