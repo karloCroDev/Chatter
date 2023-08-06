@@ -4,15 +4,8 @@ import chatStyle from "../styles/chat.module.css"
 import sendMessage from "../assets/send.png"
 import searhIcon from "../assets/search.png"
 export const Chat = () => {
-  const {
-    user,
-    image,
-    signOutFunc,
-    getUsers,
-    messageFunc,
-    getReciever,
-    getMessages,
-  } = useContext(UserContext)
+  const { user, getUsers, messageFunc, getReciever, getMessages } =
+    useContext(UserContext)
   const [displayBackroundColor, setDisplayBackgroundColor] = useState(null)
   const [getUserDoc, setGetUserDoc] = useState("")
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -24,10 +17,9 @@ export const Chat = () => {
   const getUser = (index, id) => {
     setDisplayBackgroundColor(index)
   }
-
+  // console.log(image)
   return (
     <>
-      <img src={image ? image : null} alt="" />
       <div className={chatStyle.container}>
         <aside>
           <article className={chatStyle.searchContainer}>
@@ -68,7 +60,13 @@ export const Chat = () => {
                           : chatStyle.hide
                       }`}
                     >
-                      <div className={chatStyle.imgDiv}></div>
+                      <div
+                        className={
+                          usersData.active
+                            ? chatStyle.imgDivGreen
+                            : chatStyle.imgDiv
+                        }
+                      ></div>
                       {/* Put image instead of the the divs this is for demo only */}
                       <span>
                         {usersData.usernameDoc[0].toUpperCase() +

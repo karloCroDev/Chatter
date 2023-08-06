@@ -1,6 +1,12 @@
 import { useContext, useState } from "react"
 import { Routes, Route } from "react-router-dom"
-import { SignInPage, SignUpPage, Chat, UserContext } from "./components/Exports"
+import {
+  SignInPage,
+  SignUpPage,
+  Chat,
+  UserContext,
+  Protected,
+} from "./components/Exports"
 import NavigationStyle from "./styles/navigation.module.css"
 import Icon from "./assets/chatting.png"
 import chatStyle from "./styles/chat.module.css"
@@ -22,7 +28,7 @@ export function Navigation() {
           {user ? (
             <div style={{ marginRight: "100px" }}>
               <li>
-                <div className={chatStyle.imgDiv}></div>
+                <div className={chatStyle.imgDivGreen}></div>
               </li>
               <li>
                 <span>
@@ -40,8 +46,16 @@ export function Navigation() {
           ) : null}
         </ul>
       </nav>
+
       <Routes>
-        <Route path="/chat" element={<Chat />}></Route>
+        <Route
+          path="/chat"
+          element={
+            <Protected>
+              <Chat />
+            </Protected>
+          }
+        ></Route>
         <Route path="/signUp" element={<SignUpPage />}></Route>
         <Route path="/" element={<SignInPage />}></Route>
       </Routes>

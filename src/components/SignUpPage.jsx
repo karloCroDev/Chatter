@@ -12,8 +12,8 @@ export const SignUpPage = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassowrd] = useState("")
-  const [image, setImage] = useState("")
-  console.log(image ? image[0].name : null)
+  const [imageUpload, setImageUpload] = useState("")
+
   return (
     <>
       <form
@@ -42,12 +42,12 @@ export const SignUpPage = () => {
             />
           </li>
           <li>
-            <label htmlFor="input">
+            <label htmlFor="email">
               <span>Email:</span>
             </label>
             <input
               type="text"
-              id="input"
+              id="email"
               placeholder="Enter your email..."
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -75,13 +75,13 @@ export const SignUpPage = () => {
               id="image"
               required
               className={AuthStyle.avatarInput}
-              onChange={(e) => setImage(e.target.files)}
+              onChange={(e) => setImageUpload(e.target.files[0])}
             />
           </li>
           <li>
             <button
               onClick={() => {
-                signUp(username, email, password, image[0].name)
+                signUp(username, email, password, imageUpload)
               }}
             >
               Sign up!
@@ -89,7 +89,7 @@ export const SignUpPage = () => {
           </li>
           <li>
             <p>
-              Don't have an account?{" "}
+              Don't have an account?
               <Link to="/">
                 <span>Sign in</span>
               </Link>

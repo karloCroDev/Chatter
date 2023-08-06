@@ -55,10 +55,7 @@ export const FirebaseManagment = ({ children }) => {
     async function noConversation() {
       try {
         await addDoc(conversationRef, {
-          content: [
-            // { message: "Hello world", sender: user },
-            // { message: "Hello world Two", sender: rec },
-          ],
+          content: [],
           relation: relationVar,
         })
 
@@ -76,8 +73,6 @@ export const FirebaseManagment = ({ children }) => {
   // message system
   const messageFunc = async (value) => {
     try {
-      // const relationVar = `${user} ${reciever}`
-      // const relationVarReversed = `${reciever} ${user}`
       const docRef = getMessages ? getMessages[0].id : null
       await updateDoc(doc(db, "conversations", docRef), {
         content: arrayUnion({ message: value, sender: user }),
@@ -88,13 +83,12 @@ export const FirebaseManagment = ({ children }) => {
     }
   }
 
-  console.log(getMessages ? getMessages[0].content.map((x) => x.message) : null)
-
   /////////////////////navigate
   const navigator = useNavigate()
   //signUp functionality
 
   const UsersData = collection(db, "UsersData")
+
   const signUp = async (username, email, password, image) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -105,16 +99,15 @@ export const FirebaseManagment = ({ children }) => {
       const user = userCredential.user
       await updateProfile(user, {
         displayName: username,
-        photoURL: image,
       })
 
       await addDoc(UsersData, {
         usernameDoc: username,
         emailDoc: email,
-        imageDoc: image,
+        active: true,
       })
 
-      navigator("/chat")
+      // navigator("/chat")
       window.location.reload()
     } catch (err) {
       console.error(err)
@@ -133,6 +126,11 @@ export const FirebaseManagment = ({ children }) => {
   //sign out functionality
   const signOutFunc = async () => {
     try {
+      const q = query(UsersData, where("usernameDoc", "==", user))
+      const querySnapshot = await getDocs(q)
+      await updateDoc(doc(db, "UsersData", querySnapshot.docs[0].id), {
+        active: false,
+      })
       await signOut(auth)
       console.log("Successfully signed out ")
       setUser("") //because when I log out untill I refresh there is still user icon soo
@@ -143,13 +141,13 @@ export const FirebaseManagment = ({ children }) => {
   }
   //onAuthStateChanged and user info
   //user state is on top of this document
-  const [image, setImage] = useState("")
+
   useEffect(() => {
     onAuthStateChanged(auth, (userParam) => {
       if (userParam) {
         console.log(userParam.displayName)
         setUser(userParam.displayName)
-        setImage(userParam.photoURL)
+
         navigator("/chat")
       }
       if (!userParam) console.log("No user")
@@ -163,7 +161,6 @@ export const FirebaseManagment = ({ children }) => {
       const q = query(UsersData, where("usernameDoc", "!=", user))
       const unsub = onSnapshot(q, (doc) => {
         const data = doc.docs.map((x) => ({ ...x.data(), id: x.id }))
-        console.log(data)
         setGetUsers(data)
       })
     } catch (err) {
@@ -180,7 +177,6 @@ export const FirebaseManagment = ({ children }) => {
         signIn,
         signOutFunc,
         user,
-        image,
         getUsers,
         messageFunc,
         getReciever,
