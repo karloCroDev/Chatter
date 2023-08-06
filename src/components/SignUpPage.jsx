@@ -12,7 +12,7 @@ export const SignUpPage = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassowrd] = useState("")
-  const [imageUpload, setImageUpload] = useState("")
+  // const [imageUpload, setImageUpload] = useState("")
 
   return (
     <>
@@ -66,7 +66,7 @@ export const SignUpPage = () => {
             />
           </li>
           <li className={AuthStyle.flex}>
-            <label htmlFor="image">Insert your avatar image:</label>
+            {/* <label htmlFor="image">Insert your avatar image:</label>
             <label htmlFor="image">
               <img src={photo} alt="" className={AuthStyle.image} />
             </label>
@@ -76,12 +76,12 @@ export const SignUpPage = () => {
               required
               className={AuthStyle.avatarInput}
               onChange={(e) => setImageUpload(e.target.files[0])}
-            />
+            /> */}
           </li>
           <li>
             <button
               onClick={() => {
-                signUp(username, email, password, imageUpload)
+                signUp(username, email, password)
               }}
             >
               Sign up!
@@ -89,7 +89,7 @@ export const SignUpPage = () => {
           </li>
           <li>
             <p>
-              Don't have an account?
+              Don't have an account?{" "}
               <Link to="/">
                 <span>Sign in</span>
               </Link>

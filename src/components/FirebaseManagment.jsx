@@ -89,7 +89,7 @@ export const FirebaseManagment = ({ children }) => {
 
   const UsersData = collection(db, "UsersData")
 
-  const signUp = async (username, email, password, image) => {
+  const signUp = async (username, email, password) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -111,6 +111,7 @@ export const FirebaseManagment = ({ children }) => {
       window.location.reload()
     } catch (err) {
       console.error(err)
+      alert("Something wrong! Change your email or passoword")
     }
   }
 
@@ -121,6 +122,7 @@ export const FirebaseManagment = ({ children }) => {
       navigator("/chat")
     } catch (err) {
       console.error(err)
+      alert("Something wrong! Please check for your email or password!")
     }
   }
   //sign out functionality
@@ -159,7 +161,7 @@ export const FirebaseManagment = ({ children }) => {
   useEffect(() => {
     try {
       const q = query(UsersData, where("usernameDoc", "!=", user))
-      const unsub = onSnapshot(q, (doc) => {
+      onSnapshot(q, (doc) => {
         const data = doc.docs.map((x) => ({ ...x.data(), id: x.id }))
         setGetUsers(data)
       })
