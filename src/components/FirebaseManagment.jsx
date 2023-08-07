@@ -128,11 +128,13 @@ export const FirebaseManagment = ({ children }) => {
   //sign out functionality
   const signOutFunc = async () => {
     try {
-      const q = query(UsersData, where("usernameDoc", "==", user))
-      const querySnapshot = await getDocs(q)
-      await updateDoc(doc(db, "UsersData", querySnapshot.docs[0].id), {
-        active: false,
-      })
+      // const q = query(UsersData, where("usernameDoc", "==", user))
+      // const querySnapshot = await getDocs(q)
+      // await updateDoc(doc(db, "UsersData", querySnapshot.docs[0].id), {
+      //   active: false,
+      // })
+      activeUser(false)
+
       await signOut(auth)
       console.log("Successfully signed out ")
       setUser("") //because when I log out untill I refresh there is still user icon soo
@@ -149,7 +151,6 @@ export const FirebaseManagment = ({ children }) => {
       if (userParam) {
         console.log(userParam.displayName)
         setUser(userParam.displayName)
-
         navigator("/chat")
       }
       if (!userParam) console.log("No user")
@@ -159,17 +160,30 @@ export const FirebaseManagment = ({ children }) => {
   const [getUsers, setGetUsers] = useState("")
 
   useEffect(() => {
+    const q = query(UsersData, where("usernameDoc", "!=", user))
+    const unsubscribe = onSnapshot(q, (doc) => {
+      const data = doc.docs.map((x) => ({ ...x.data(), id: x.id }))
+      setGetUsers(data)
+      activeUser(true)
+    })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [user])
+
+  async function activeUser(status) {
     try {
-      const q = query(UsersData, where("usernameDoc", "!=", user))
-      onSnapshot(q, (doc) => {
-        const data = doc.docs.map((x) => ({ ...x.data(), id: x.id }))
-        setGetUsers(data)
+      const q = query(UsersData, where("usernameDoc", "==", user))
+      const querySnapshot = await getDocs(q)
+      console.log(querySnapshot.docs)
+      await updateDoc(doc(db, "UsersData", querySnapshot.docs[0].id), {
+        active: status,
       })
     } catch (err) {
       console.error(err)
     }
-  }, [user])
-
+  }
   ////////
 
   return (

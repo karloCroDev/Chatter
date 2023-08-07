@@ -24,6 +24,9 @@ span {
 input {
   color: #fff;
 }
+button {
+  cursor: pointer;
+}
 ::-webkit-scrollbar {
   width: 5px; /* Set the width of the scrollbar */
 }

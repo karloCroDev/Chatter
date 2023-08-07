@@ -13,10 +13,21 @@ export const Chat = () => {
   ///search section
   const searchValue = useRef()
   const [search, setSearch] = useState("")
-
+  const [active, setActive] = useState("")
   const getUser = (index, id) => {
     setDisplayBackgroundColor(index)
   }
+
+  //this useEffect is essentially to update setActive whenever  getUsers changes like setting active to false so this will change style too
+  //this is done because it was getting to much renders
+  useEffect(() => {
+    getUsers
+      ? getUsers.map((usersData, i) => {
+          setActive(usersData.active)
+        })
+      : null
+  }, [getUsers])
+
   // console.log(image)
   return (
     <>
@@ -47,6 +58,7 @@ export const Chat = () => {
                         )
                         setDisplayContainer(true)
                         getReciever(usersData.usernameDoc)
+                        setActive(usersData.active)
                       }}
                       className={`${
                         displayBackroundColor === i
@@ -83,7 +95,11 @@ export const Chat = () => {
             <>
               <ul>
                 <li>
-                  <div className={chatStyle.imgDiv}></div>
+                  <div
+                    className={
+                      active ? chatStyle.imgDivGreen : chatStyle.imgDiv
+                    }
+                  ></div>
                   {/* change image as soon as possible  */}
                 </li>
                 <li>
