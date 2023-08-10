@@ -36,7 +36,12 @@ export const Chat = () => {
           <article className={chatStyle.searchContainer}>
             <label htmlFor="searchBar">Search for your friends:</label>
             <div>
-              <input type="text" id="searchBar" ref={searchValue} />
+              <input
+                type="text"
+                id="searchBar"
+                ref={searchValue}
+                placeholder="Enter your friend and click search icon "
+              />
               <img
                 src={searhIcon}
                 alt="search button"
@@ -118,7 +123,7 @@ export const Chat = () => {
                               : chatStyle.rightMessage
                           }
                         >
-                          {x.message}
+                          {x.message.substring("0", "50")}
                         </li>
                       ))
                     : null}

@@ -28,6 +28,7 @@ export const FirebaseManagment = ({ children }) => {
   const [getMessages, setGetMessages] = useState("")
   const [reciever, setReciever] = useState("")
   const conversationRef = collection(db, "conversations")
+  const UsersData = collection(db, "UsersData")
 
   const filterUsers = (snapshot) => {
     const data = snapshot.docs.map((x) => ({ ...x.data(), id: x.id }))
@@ -87,31 +88,40 @@ export const FirebaseManagment = ({ children }) => {
   const navigator = useNavigate()
   //signUp functionality
 
-  const UsersData = collection(db, "UsersData")
-
   const signUp = async (username, email, password) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
-      const user = userCredential.user
-      await updateProfile(user, {
-        displayName: username,
-      })
+    const q = query(UsersData, where("usernameDoc", "==", username))
+    const check = await getDocs(q)
+    if (check.size > 0) {
+      alert("Username already exists")
+    }
+    if (check.size == 0) {
+      validation()
+    }
 
-      await addDoc(UsersData, {
-        usernameDoc: username,
-        emailDoc: email,
-        active: true,
-      })
+    async function validation() {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
+        const user = userCredential.user
+        await updateProfile(user, {
+          displayName: username,
+        })
 
-      // navigator("/chat")
-      window.location.reload()
-    } catch (err) {
-      console.error(err)
-      alert("Something wrong! Change your email or passoword")
+        await addDoc(UsersData, {
+          usernameDoc: username,
+          emailDoc: email,
+          active: true,
+        })
+
+        // navigator("/chat")
+        window.location.reload()
+      } catch (err) {
+        console.error(err)
+        alert("Something wrong! Change your email or passoword")
+      }
     }
   }
 
