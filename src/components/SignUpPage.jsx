@@ -26,8 +26,11 @@ export const SignUpPage = () => {
           className={`${AuthStyle.contentContainer} ${AuthStyle.contentContainerTwo}`}
         >
           <li>
-            <div className={AuthStyle.title}>Welcome to the Chatter!</div>
-            <p>The place where everyone chatts</p>
+            <div className={AuthStyle.title2}>Welcome to the Chatter!</div>
+            <p>
+              Private messaging app where you can send only one unique message
+              less than 50 chrachters!
+            </p>
           </li>
           <li>
             <label htmlFor="input">

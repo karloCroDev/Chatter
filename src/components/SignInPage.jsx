@@ -20,7 +20,10 @@ export const SignInPage = () => {
         <ul className={AuthStyle.contentContainer}>
           <li>
             <div className={AuthStyle.title}>Welcome back to the Chatter!</div>
-            <p>The place where everyone chatts</p>
+            <p>
+              Private messaging app where you can send only one unique message
+              less than 50 chrachters!
+            </p>
           </li>
           <li>
             <label htmlFor="input">
@@ -46,7 +49,7 @@ export const SignInPage = () => {
               required
             />
           </li>
-          <li>
+          <li className={AuthStyle.btn2}>
             <button onClick={() => signIn(email, password)}>Log in!</button>
           </li>
 
