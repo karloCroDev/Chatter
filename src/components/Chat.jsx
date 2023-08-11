@@ -40,13 +40,10 @@ export const Chat = () => {
                 type="text"
                 id="searchBar"
                 ref={searchValue}
-                placeholder="Enter your friend and click search icon "
+                placeholder="Enter your friend "
+                onChange={() => setSearch(searchValue.current.value)}
               />
-              <img
-                src={searhIcon}
-                alt="search button"
-                onClick={() => setSearch(searchValue.current.value)}
-              />
+              <img src={searhIcon} alt="search button" />
             </div>
           </article>
           {getUsers
