@@ -13,7 +13,7 @@ export const SignUpPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassowrd] = useState("")
   // const [imageUpload, setImageUpload] = useState("")
-
+  console.log(username)
   return (
     <>
       <form
@@ -40,7 +40,7 @@ export const SignUpPage = () => {
               type="text"
               id="input"
               placeholder="Enter your email..."
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.toLowerCase())}
               required
             />
           </li>
@@ -93,7 +93,7 @@ export const SignUpPage = () => {
           <li>
             <p>
               Don't have an account?{" "}
-              <Link to="/">
+              <Link to="/" style={{ textDecoration: "none" }}>
                 <span>Sign in</span>
               </Link>
             </p>

@@ -23,6 +23,9 @@ import {
 export const UserContext = createContext()
 
 export const FirebaseManagment = ({ children }) => {
+  //Trigger to onAuthStatChanged temporary fix
+  const [trigger, setTrigger] = useState(0)
+
   //////Getting users and message system
   const [user, setUser] = useState("")
   const [getMessages, setGetMessages] = useState("")
@@ -98,6 +101,7 @@ export const FirebaseManagment = ({ children }) => {
       validation()
     }
 
+    //because of hoisting so no variable
     async function validation() {
       try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -116,8 +120,7 @@ export const FirebaseManagment = ({ children }) => {
           active: true,
         })
 
-        // navigator("/chat")
-        window.location.reload()
+        setTrigger(trigger + 1)
       } catch (err) {
         console.error(err)
         alert("Something wrong! Change your email or passoword")
@@ -129,7 +132,7 @@ export const FirebaseManagment = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      navigator("/chat")
+      setTrigger(trigger + 1)
     } catch (err) {
       console.error(err)
       alert("Something wrong! Please check for your email or password!")
@@ -146,8 +149,8 @@ export const FirebaseManagment = ({ children }) => {
       activeUser(false)
 
       await signOut(auth)
-      console.log("Successfully signed out ")
-      setUser("") //because when I log out untill I refresh there is still user icon soo
+      setTrigger(trigger + 1) //just to trigger
+
       navigator("/")
     } catch (err) {
       console.error(err)
@@ -157,15 +160,15 @@ export const FirebaseManagment = ({ children }) => {
   //user state is on top of this document
 
   useEffect(() => {
-    onAuthStateChanged(auth, (userParam) => {
+    const unsub = onAuthStateChanged(auth, (userParam) => {
       if (userParam) {
-        console.log(userParam.displayName)
         setUser(userParam.displayName)
         navigator("/chat")
       }
-      if (!userParam) console.log("No user")
+      if (!userParam) setUser("")
     })
-  }, [])
+    return unsub()
+  }, [trigger])
   // displaying the users
   const [getUsers, setGetUsers] = useState("")
 

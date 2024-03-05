@@ -76,7 +76,7 @@
   position: sticky;
   top: 20px;
   left: 10px;
-  background-color: rgb(47, 47, 47) !important;
+  background-color: #2d2d33 !important;
 }
 .searchContainer div {
   width: 80%;
@@ -111,22 +111,22 @@ nav ul div span {
   margin-left: 20px;
 }
 .sendMessage {
-  min-width: 95%;
+  width: 95%;
   min-height: 65px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   border-radius: 20px;
   overflow: hidden;
   margin-top: auto;
-  margin-bottom: 25px;
   position: sticky !important;
   bottom: 20px;
 }
 .sendMessage input {
   all: unset;
-  width: calc(100% - 75px);
+  width: 100%;
   height: 100%;
   background-color: rgba(47, 47, 55, 0.799);
   padding-left: 10px;
@@ -136,11 +136,10 @@ nav ul div span {
   height: 100%;
   background-color: rgba(47, 47, 55, 0.799);
   color: #fff;
+  border-radius: 0px 20px 20px 0px;
+  position: relative;
 }
 
-.sendMessage button {
-  border-radius: 0px 20px 20px 0px;
-}
 .bgColor {
   background-color: #354a5a !important;
 }
@@ -166,7 +165,7 @@ nav ul div span {
 .chattingContainer ul li {
   margin-top: 20px;
   font-size: 25px;
-  width: 60%;
+  width: auto;
   min-height: 75px;
   max-height: fit-content;
   border-radius: 20px;
@@ -180,11 +179,15 @@ nav ul div span {
 .leftMessage {
   margin-right: auto;
   background-color: #354a5a;
+
+  padding: 0px 50px;
 }
 .rightMessage {
   margin-left: auto;
   background-color: rgba(47, 47, 55, 0.799);
   margin-right: 20px;
+
+  padding: 0px 50px;
 }
 .hide {
   display: none !important;

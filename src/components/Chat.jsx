@@ -10,6 +10,7 @@ export const Chat = () => {
   const [getUserDoc, setGetUserDoc] = useState("")
   const [displayContainer, setDisplayContainer] = useState(false)
   const inputValue = useRef()
+  const btnEl = useRef()
   ///search section
   const searchValue = useRef()
   const [search, setSearch] = useState("")
@@ -22,7 +23,7 @@ export const Chat = () => {
   //this is done because it was getting to much renders
   useEffect(() => {
     getUsers
-      ? getUsers.map((usersData, i) => {
+      ? getUsers.map((usersData) => {
           setActive(usersData.active)
         })
       : null
@@ -120,7 +121,7 @@ export const Chat = () => {
                               : chatStyle.rightMessage
                           }
                         >
-                          {x.message.substring("0", "50")}
+                          {x.message}
                         </li>
                       ))
                     : null}
@@ -130,10 +131,27 @@ export const Chat = () => {
                     type="text"
                     placeholder="Enter your message..."
                     ref={inputValue}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" ? btnEl.current.click() : null
+                      console.log(e.key)
+                    }}
                   />
                   <button
                     className={chatStyle.sendMessageFalse}
-                    onClick={() => messageFunc(inputValue.current.value)}
+                    ref={btnEl}
+                    onClick={() => {
+                      if (
+                        inputValue.current.value.length > 0 &&
+                        inputValue.current.value.length < 51
+                      ) {
+                        messageFunc(inputValue.current.value)
+                        inputValue.current.value = ""
+                      } else {
+                        alert(
+                          "Your message must need atleast 1 charachter and maximum of 50  charachters"
+                        )
+                      }
+                    }}
                   >
                     <img src={sendMessage} alt="send button" />
                   </button>

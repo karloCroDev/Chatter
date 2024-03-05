@@ -56,7 +56,7 @@ export const SignInPage = () => {
           <li>
             <p>
               Don't have an account?{" "}
-              <Link to="/signup">
+              <Link to="/signup" style={{ textDecoration: "none" }}>
                 <span>Sign Up</span>
               </Link>
             </p>
