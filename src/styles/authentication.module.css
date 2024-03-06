@@ -6,9 +6,10 @@
   justify-content: center;
   align-items: center;
 }
+
 .contentContainer {
   width: 555px;
-  height: 650px;
+  height: 700px;
   border-radius: 20px;
   border: 2px solid #fff;
   display: flex;
@@ -51,12 +52,18 @@
 }
 .contentContainer li button {
   color: #fff;
-  width: 70%;
+  width: 80%;
   border-radius: 12px;
-  height: 60px;
+  height: 75px;
   background-color: #354a5a;
+  font-size: 20px;
   border: 2px solid #fff;
 }
+.contentContainer li button:hover {
+  background-color: rgb(78, 111, 136);
+  transition: background-color 250ms linear;
+}
+
 .contentContainer .btn2 {
   margin-top: 40px !important;
 }
@@ -66,12 +73,6 @@
 }
 .avatarInput {
   display: none;
-}
-.flex {
-  width: 80% !important;
-  display: flex !important;
-  flex-direction: row !important;
-  margin-top: 28px !important;
 }
 
 .image {
@@ -90,4 +91,13 @@
     width: 550px;
     height: 650px;
   }
+}
+
+.contentContainer .specialContainer label:first-child {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+  padding-bottom: 20px;
 }

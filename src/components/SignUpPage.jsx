@@ -12,7 +12,7 @@ export const SignUpPage = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassowrd] = useState("")
-  // const [imageUpload, setImageUpload] = useState("")
+  const [imageUpload, setImageUpload] = useState("")
   console.log(username)
   return (
     <>
@@ -20,6 +20,7 @@ export const SignUpPage = () => {
         className={AuthStyle.container}
         onSubmit={(e) => {
           e.preventDefault()
+          signUp(username, email, password)
         }}
       >
         <ul
@@ -68,27 +69,22 @@ export const SignUpPage = () => {
               required
             />
           </li>
-          <li className={AuthStyle.flex}>
-            {/* <label htmlFor="image">Insert your avatar image:</label>
+          <li className={AuthStyle.specialContainer}>
             <label htmlFor="image">
+              Insert your avatar image:
               <img src={photo} alt="" className={AuthStyle.image} />
             </label>
+
             <input
               type="file"
               id="image"
               required
               className={AuthStyle.avatarInput}
               onChange={(e) => setImageUpload(e.target.files[0])}
-            /> */}
+            />
           </li>
           <li>
-            <button
-              onClick={() => {
-                signUp(username, email, password)
-              }}
-            >
-              Sign up!
-            </button>
+            <button>Sign up!</button>
           </li>
           <li>
             <p>

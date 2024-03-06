@@ -15,6 +15,7 @@ export const SignInPage = () => {
         className={AuthStyle.container}
         onSubmit={(e) => {
           e.preventDefault()
+          signIn(email, password)
         }}
       >
         <ul className={AuthStyle.contentContainer}>
@@ -50,7 +51,7 @@ export const SignInPage = () => {
             />
           </li>
           <li className={AuthStyle.btn2}>
-            <button onClick={() => signIn(email, password)}>Log in!</button>
+            <button>Log in!</button>
           </li>
 
           <li>

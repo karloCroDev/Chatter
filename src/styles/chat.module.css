@@ -10,6 +10,7 @@
   grid-template-columns: 520px 2fr;
   overflow: hidden;
 }
+
 .container aside {
   width: 100%;
   max-height: 100%;
@@ -130,7 +131,6 @@ nav ul div span {
   height: 100%;
   background-color: rgba(47, 47, 55, 0.799);
   padding-left: 10px;
-  box-sizing: border-box;
 }
 .sendMessage button {
   all: unset;
@@ -176,7 +176,9 @@ nav ul div span {
 .chattingContainer ul li p {
   max-width: 300px;
   height: 100%;
+  text-align: center;
   word-wrap: break-word;
+  text-wrap: balance;
 }
 
 .chattingContainer ul li:last-child {
