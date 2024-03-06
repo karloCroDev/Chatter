@@ -121,7 +121,7 @@ nav ul div span {
   border-radius: 20px;
   overflow: hidden;
   margin-top: auto;
-  position: sticky !important;
+  position: sticky;
   bottom: 20px;
 }
 .sendMessage input {
@@ -130,6 +130,7 @@ nav ul div span {
   height: 100%;
   background-color: rgba(47, 47, 55, 0.799);
   padding-left: 10px;
+  box-sizing: border-box;
 }
 .sendMessage button {
   all: unset;
@@ -165,14 +166,19 @@ nav ul div span {
 .chattingContainer ul li {
   margin-top: 20px;
   font-size: 25px;
-  width: auto;
+  max-width: 350px;
   min-height: 75px;
-  max-height: fit-content;
   border-radius: 20px;
-  text-align: center;
-  line-height: 75px;
-  overflow-wrap: break-word;
+  display: grid;
+  place-content: center;
+  padding: 15px 20px;
 }
+.chattingContainer ul li p {
+  max-width: 300px;
+  height: 100%;
+  word-wrap: break-word;
+}
+
 .chattingContainer ul li:last-child {
   margin-bottom: 75px;
 }

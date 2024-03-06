@@ -121,7 +121,10 @@ export const Chat = () => {
                               : chatStyle.rightMessage
                           }
                         >
-                          {x.message}
+                          <p>
+                            {x.message.split(" ")[0][0].toUpperCase() +
+                              x.message.substring(1)}
+                          </p>
                         </li>
                       ))
                     : null}
