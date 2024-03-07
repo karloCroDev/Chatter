@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react"
 import { storage } from "../firebase.js"
-import { ref, uploadBytes } from "firebase/storage"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { updateProfile } from "firebase/auth"
 export const ImageContx = createContext()
 const ImageUpload = ({ children }) => {
   const uploadImageFunc = async (img, uid) => {
@@ -12,10 +13,21 @@ const ImageUpload = ({ children }) => {
       console.error(error)
     }
   }
+  const setImage = async (uid, user) => {
+    try {
+      const dowURL = await getDownloadURL(ref(storage, `pfp/${uid}`))
+      console.log(dowURL)
+      await updateProfile(user, {
+        photoURL: dowURL,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <>
-      <ImageContx.Provider value={{ uploadImageFunc }}>
+      <ImageContx.Provider value={{ uploadImageFunc, setImage }}>
         {children}
       </ImageContx.Provider>
     </>

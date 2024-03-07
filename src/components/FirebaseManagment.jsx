@@ -32,6 +32,7 @@ export const FirebaseManagment = ({ children }) => {
   const [user, setUser] = useState("")
   const [getMessages, setGetMessages] = useState("")
   const [reciever, setReciever] = useState("")
+  const [image, setImage] = useState("")
   const conversationRef = collection(db, "conversations")
   const UsersData = collection(db, "UsersData")
 
@@ -166,6 +167,7 @@ export const FirebaseManagment = ({ children }) => {
       if (userParam) {
         setUserUid(userParam.uid)
         setUser(userParam.displayName)
+        setImage(userParam.photoURL)
         navigator("/chat")
       }
       if (!userParam) setUser("")

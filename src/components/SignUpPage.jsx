@@ -7,8 +7,8 @@ import { ImageContx } from "./ImageUpload.jsx"
 
 export const SignUpPage = () => {
   //Firebase managment
-  const { signUp, userUid } = useContext(UserContext)
-  const { uploadImageFunc } = useContext(ImageContx)
+  const { signUp, userUid, user } = useContext(UserContext)
+  const { uploadImageFunc, setImage } = useContext(ImageContx)
   //form functionality
   // console.log(userUid)
   const [username, setUsername] = useState("")
@@ -25,6 +25,7 @@ export const SignUpPage = () => {
           await signUp(username, email, password)
           console.log(userUid)
           await uploadImageFunc(imageUpload, userUid)
+          await setImage(userUid, user)
         }}
       >
         <ul
