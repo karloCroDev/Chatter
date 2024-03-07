@@ -1,26 +1,30 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import AuthStyle from "../styles/authentication.module.css"
 import { Link } from "react-router-dom"
 import photo from "../assets/photo.png"
 import { UserContext } from "./FirebaseManagment.jsx"
+import { ImageContx } from "./ImageUpload.jsx"
 
 export const SignUpPage = () => {
   //Firebase managment
-  const { signUp } = useContext(UserContext)
-
+  const { signUp, userUid } = useContext(UserContext)
+  const { uploadImageFunc } = useContext(ImageContx)
   //form functionality
+  // console.log(userUid)
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassowrd] = useState("")
   const [imageUpload, setImageUpload] = useState("")
-  console.log(username)
+  console.log(userUid)
   return (
     <>
       <form
         className={AuthStyle.container}
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault()
-          signUp(username, email, password)
+          await signUp(username, email, password)
+          console.log(userUid)
+          await uploadImageFunc(imageUpload, userUid)
         }}
       >
         <ul
@@ -80,7 +84,10 @@ export const SignUpPage = () => {
               id="image"
               required
               className={AuthStyle.avatarInput}
-              onChange={(e) => setImageUpload(e.target.files[0])}
+              onChange={(e) => {
+                const file = e.target.files[0]
+                setImageUpload(file)
+              }}
             />
           </li>
           <li>

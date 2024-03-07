@@ -23,6 +23,8 @@ import {
 export const UserContext = createContext()
 
 export const FirebaseManagment = ({ children }) => {
+  const [userUid, setUserUid] = useState("")
+
   //Trigger to onAuthStatChanged temporary fix
   const [trigger, setTrigger] = useState(0)
 
@@ -162,6 +164,7 @@ export const FirebaseManagment = ({ children }) => {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (userParam) => {
       if (userParam) {
+        setUserUid(userParam.uid)
         setUser(userParam.displayName)
         navigator("/chat")
       }
@@ -211,6 +214,7 @@ export const FirebaseManagment = ({ children }) => {
         getReciever,
         getMessages,
         reciever,
+        userUid,
       }}
     >
       {children}
