@@ -3,6 +3,7 @@ import { UserContext } from "./FirebaseManagment"
 import chatStyle from "../styles/chat.module.css"
 import sendMessage from "../assets/send.png"
 import searhIcon from "../assets/search.png"
+
 export const Chat = () => {
   const { user, getUsers, messageFunc, getReciever, getMessages, image } =
     useContext(UserContext)
@@ -15,6 +16,7 @@ export const Chat = () => {
   const searchValue = useRef()
   const [search, setSearch] = useState("")
   const [active, setActive] = useState("")
+  const [imageFromDb, setIMageFromDb] = useState("")
   const getUser = (index, id) => {
     setDisplayBackgroundColor(index)
   }
@@ -49,6 +51,7 @@ export const Chat = () => {
           </article>
           {getUsers
             ? getUsers.map((usersData, i) => {
+                if (imageFromDb === "") setIMageFromDb(usersData.image)
                 return (
                   <>
                     <article
@@ -75,14 +78,16 @@ export const Chat = () => {
                           : chatStyle.hide
                       }`}
                     >
-                      <img src={usersData.image} alt="pfpImage" />
-                      {/* <div
-                        className={
-                          usersData.active
-                            ? chatStyle.imgDivGreen
-                            : chatStyle.imgDiv
-                        }
-                      ></div> */}
+                      <div className={chatStyle.imageContainer}>
+                        <img src={usersData.image} alt="pfpImage" />
+                        <div
+                          className={
+                            usersData.active
+                              ? chatStyle.imgDivGreen
+                              : chatStyle.imgDiv
+                          }
+                        ></div>
+                      </div>
                       {/* Put image instead of the the divs this is for demo only */}
                       <span>
                         {usersData.usernameDoc[0].toUpperCase() +
@@ -99,11 +104,14 @@ export const Chat = () => {
             <>
               <ul>
                 <li>
-                  <div
-                    className={
-                      active ? chatStyle.imgDivGreen : chatStyle.imgDiv
-                    }
-                  ></div>
+                  <div className={chatStyle.imageContainer}>
+                    <img src={imageFromDb} alt="pfpImage" />
+                    <div
+                      className={
+                        active ? chatStyle.imgDivGreen : chatStyle.imgDiv
+                      }
+                    ></div>
+                  </div>
                   {/* change image as soon as possible  */}
                 </li>
                 <li>

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import { auth, db } from "../firebase.js"
 import {
   createUserWithEmailAndPassword,
@@ -20,9 +20,13 @@ import {
   where,
   getDocs,
 } from "firebase/firestore"
+import { ImageContx } from "./ImageUpload.jsx"
+
 export const UserContext = createContext()
 
 export const FirebaseManagment = ({ children }) => {
+  const { uploadImageFunc, setImage } = useContext(ImageContx)
+
   const [userUid, setUserUid] = useState("")
 
   //Trigger to onAuthStatChanged temporary fix
@@ -93,7 +97,7 @@ export const FirebaseManagment = ({ children }) => {
   const navigator = useNavigate()
   //signUp functionality
 
-  const signUp = async (username, email, password) => {
+  const signUp = async (username, email, password, img) => {
     const q = query(UsersData, where("usernameDoc", "==", username))
     const check = await getDocs(q)
     if (check.size > 0) {
@@ -115,14 +119,14 @@ export const FirebaseManagment = ({ children }) => {
         await updateProfile(user, {
           displayName: username,
         })
-
+        setTrigger(trigger + 1)
+        await uploadImageFunc(img, userUid)
         await addDoc(UsersData, {
           usernameDoc: username,
           emailDoc: email,
           active: true,
+          image: await setImage(userUid),
         })
-
-        setTrigger(trigger + 1)
       } catch (err) {
         console.error(err)
         alert("Something wrong! Change your email or passoword")
