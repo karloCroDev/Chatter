@@ -4,7 +4,7 @@ import chatStyle from "../styles/chat.module.css"
 import sendMessage from "../assets/send.png"
 import searhIcon from "../assets/search.png"
 export const Chat = () => {
-  const { user, getUsers, messageFunc, getReciever, getMessages } =
+  const { user, getUsers, messageFunc, getReciever, getMessages, image } =
     useContext(UserContext)
   const [displayBackroundColor, setDisplayBackgroundColor] = useState(null)
   const [getUserDoc, setGetUserDoc] = useState("")
@@ -18,9 +18,9 @@ export const Chat = () => {
   const getUser = (index, id) => {
     setDisplayBackgroundColor(index)
   }
-
+  console.log(image)
   //this useEffect is essentially to update setActive whenever  getUsers changes like setting active to false so this will change style too
-  //this is done because it was getting to much renders
+
   useEffect(() => {
     getUsers
       ? getUsers.map((usersData) => {
@@ -75,13 +75,14 @@ export const Chat = () => {
                           : chatStyle.hide
                       }`}
                     >
-                      <div
+                      <img src={usersData.image} alt="pfpImage" />
+                      {/* <div
                         className={
                           usersData.active
                             ? chatStyle.imgDivGreen
                             : chatStyle.imgDiv
                         }
-                      ></div>
+                      ></div> */}
                       {/* Put image instead of the the divs this is for demo only */}
                       <span>
                         {usersData.usernameDoc[0].toUpperCase() +

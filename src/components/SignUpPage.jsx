@@ -15,7 +15,8 @@ export const SignUpPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassowrd] = useState("")
   const [imageUpload, setImageUpload] = useState("")
-  console.log(userUid)
+  // console.log(userUid)
+
   return (
     <>
       <form
