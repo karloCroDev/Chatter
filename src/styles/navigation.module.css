@@ -22,8 +22,8 @@
   margin-right: 50px;
   cursor: pointer;
 }
-@media screen and (min-height: 0px) and (max-height: 950px) {
+@media screen and (min-height: 0px) and (max-height: 1080px) {
   .ul {
-    height: 120px;
+    height: 110px;
   }
 }

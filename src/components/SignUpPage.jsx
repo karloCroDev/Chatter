@@ -1,20 +1,21 @@
-import React, { useContext, useEffect, useState } from "react"
-import AuthStyle from "../styles/authentication.module.css"
-import { Link } from "react-router-dom"
-import photo from "../assets/photo.png"
-import { UserContext } from "./FirebaseManagment.jsx"
-import { ImageContx } from "./ImageUpload.jsx"
+import React, { useContext, useEffect, useState } from "react";
+import AuthStyle from "../styles/authentication.module.css";
+import { Link } from "react-router-dom";
+import photo from "../assets/photo.png";
+import { UserContext } from "./FirebaseManagment.jsx";
+import { ImageContx } from "./ImageUpload.jsx";
+import toast, { Toaster } from "react-hot-toast";
 
 export const SignUpPage = () => {
   //Firebase managment
-  const { signUp, userUid, user } = useContext(UserContext)
+  const { signUp, userUid, user } = useContext(UserContext);
 
   //form functionality
   // console.log(userUid)
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassowrd] = useState("")
-  const [imageUpload, setImageUpload] = useState("")
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassowrd] = useState("");
+  const [imageUpload, setImageUpload] = useState("");
   // console.log(userUid)
 
   return (
@@ -22,8 +23,8 @@ export const SignUpPage = () => {
       <form
         className={AuthStyle.container}
         onSubmit={(e) => {
-          e.preventDefault()
-          signUp(username, email, password, imageUpload)
+          e.preventDefault();
+          signUp(username, email, password, imageUpload);
         }}
       >
         <ul
@@ -84,8 +85,8 @@ export const SignUpPage = () => {
               required
               className={AuthStyle.avatarInput}
               onChange={(e) => {
-                const file = e.target.files[0]
-                setImageUpload(file)
+                const file = e.target.files[0];
+                setImageUpload(file);
               }}
             />
           </li>
@@ -103,5 +104,5 @@ export const SignUpPage = () => {
         </ul>
       </form>
     </>
-  )
-}
+  );
+};

@@ -1,21 +1,23 @@
-import React, { useContext, useState } from "react"
-import AuthStyle from "../styles/authentication.module.css"
-import { Link } from "react-router-dom"
-import { UserContext } from "./FirebaseManagment.jsx"
+import React, { useContext, useState } from "react";
+import AuthStyle from "../styles/authentication.module.css";
+import { Link } from "react-router-dom";
+import { UserContext } from "./FirebaseManagment.jsx";
+import toast, { Toaster } from "react-hot-toast";
 
 export const SignInPage = () => {
   //Firebase managment
-  const { signIn, signOutFunc } = useContext(UserContext)
+  const { signIn, signOutFunc } = useContext(UserContext);
   //forms
-  const [email, setEmail] = useState("")
-  const [password, setPassowrd] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassowrd] = useState("");
+
   return (
     <>
       <form
         className={AuthStyle.container}
         onSubmit={(e) => {
-          e.preventDefault()
-          signIn(email, password)
+          e.preventDefault();
+          signIn(email, password);
         }}
       >
         <ul className={AuthStyle.contentContainer}>
@@ -65,5 +67,5 @@ export const SignInPage = () => {
         </ul>
       </form>
     </>
-  )
-}
+  );
+};

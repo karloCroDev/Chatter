@@ -1,35 +1,35 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
-import { UserContext } from "./FirebaseManagment"
-import chatStyle from "../styles/chat.module.css"
-import sendMessage from "../assets/send.png"
-import searhIcon from "../assets/search.png"
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { UserContext } from "./FirebaseManagment";
+import chatStyle from "../styles/chat.module.css";
+import sendMessage from "../assets/send.png";
+import searhIcon from "../assets/search.png";
 
 export const Chat = () => {
   const { user, getUsers, messageFunc, getReciever, getMessages, image } =
-    useContext(UserContext)
-  const [displayBackroundColor, setDisplayBackgroundColor] = useState(null)
-  const [getUserDoc, setGetUserDoc] = useState("")
-  const [displayContainer, setDisplayContainer] = useState(false)
-  const inputValue = useRef()
-  const btnEl = useRef()
+    useContext(UserContext);
+  const [displayBackroundColor, setDisplayBackgroundColor] = useState(null);
+  const [getUserDoc, setGetUserDoc] = useState("");
+  const [displayContainer, setDisplayContainer] = useState(false);
+  const inputValue = useRef();
+  const btnEl = useRef();
   ///search section
-  const searchValue = useRef()
-  const [search, setSearch] = useState("")
-  const [active, setActive] = useState("")
-  const [imageFromDb, setIMageFromDb] = useState("")
-  const getUser = (index, id) => {
-    setDisplayBackgroundColor(index)
-  }
-  console.log(image)
+  const searchValue = useRef();
+  const [search, setSearch] = useState("");
+  const [active, setActive] = useState("");
+  const [imageFromDb, setIMageFromDb] = useState("");
+  const getUser = (index) => {
+    setDisplayBackgroundColor(index);
+  };
+  console.log(image);
   //this useEffect is essentially to update setActive whenever  getUsers changes like setting active to false so this will change style too
 
   useEffect(() => {
     getUsers
       ? getUsers.map((usersData) => {
-          setActive(usersData.active)
+          setActive(usersData.active);
         })
-      : null
-  }, [getUsers])
+      : null;
+  }, [getUsers]);
 
   // console.log(image)
   return (
@@ -51,20 +51,20 @@ export const Chat = () => {
           </article>
           {getUsers
             ? getUsers.map((usersData, i) => {
-                if (imageFromDb === "") setIMageFromDb(usersData.image)
                 return (
                   <>
                     <article
                       key={i}
                       onClick={() => {
-                        getUser(i, usersData.id)
+                        setIMageFromDb(usersData.image);
+                        getUser(i);
                         setGetUserDoc(
                           usersData.usernameDoc[0].toUpperCase() +
                             usersData.usernameDoc.slice(1)
-                        )
-                        setDisplayContainer(true)
-                        getReciever(usersData.usernameDoc)
-                        setActive(usersData.active)
+                        );
+                        setDisplayContainer(true);
+                        getReciever(usersData.usernameDoc);
+                        setActive(usersData.active);
                       }}
                       className={`${
                         displayBackroundColor === i
@@ -95,7 +95,7 @@ export const Chat = () => {
                       </span>
                     </article>
                   </>
-                )
+                );
               })
             : null}
         </aside>
@@ -144,8 +144,8 @@ export const Chat = () => {
                     placeholder="Enter your message..."
                     ref={inputValue}
                     onKeyDown={(e) => {
-                      e.key === "Enter" ? btnEl.current.click() : null
-                      console.log(e.key)
+                      e.key === "Enter" ? btnEl.current.click() : null;
+                      console.log(e.key);
                     }}
                   />
                   <button
@@ -156,12 +156,12 @@ export const Chat = () => {
                         inputValue.current.value.length > 0 &&
                         inputValue.current.value.length < 51
                       ) {
-                        messageFunc(inputValue.current.value)
-                        inputValue.current.value = ""
+                        messageFunc(inputValue.current.value);
+                        inputValue.current.value = "";
                       } else {
                         alert(
                           "Your message must need atleast 1 charachter and maximum of 50  charachters"
-                        )
+                        );
                       }
                     }}
                   >
@@ -171,18 +171,12 @@ export const Chat = () => {
               </div>
             </>
           ) : (
-            <div
-              style={{
-                textAlign: "center",
-                fontSize: "50px",
-                lineHeight: "calc(100vh - 140px)",
-              }}
-            >
+            <div className={chatStyle.selectUser}>
               Please select user to start chatting
             </div>
           )}
         </main>
       </div>
     </>
-  )
-}
+  );
+};

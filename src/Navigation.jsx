@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { Routes, Route } from "react-router-dom"
 import {
   SignInPage,
@@ -13,8 +13,8 @@ import chatStyle from "./styles/chat.module.css"
 import signOutIcon from "./assets/signOut.png"
 
 export function Navigation() {
-  const { user, signOutFunc } = useContext(UserContext)
-
+  const { user, signOutFunc, userImage } = useContext(UserContext)
+  console.log(userImage)
   return (
     <>
       <nav>
@@ -28,7 +28,10 @@ export function Navigation() {
           {user ? (
             <div style={{ marginRight: "100px" }}>
               <li>
-                <div className={chatStyle.imgDivGreen}></div>
+                <div className={chatStyle.imageContainer}>
+                  <img src={userImage} alt="pfpImage" />
+                  <div className={chatStyle.imgDivGreen}></div>
+                </div>
               </li>
               <li>
                 <span>
