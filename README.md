@@ -22,7 +22,7 @@ Note: I didn't make this website mobile responsive, however it should work fine 
 
 **Getting started**
  - I hosted the app using Firebase hosting, so feel free to check it out  👉[Chatter](https://chat-app-deploy.web.app/)
- -Clone the app
+ - Clone the app (if you want to run it locally)
 ```
 git clone "https://github.com/karloCroDev/swift-shop.git"
 ```
