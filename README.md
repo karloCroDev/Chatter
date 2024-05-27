@@ -3,8 +3,7 @@
 ![image](https://github.com/karloCroDev/chat-app/assets/117281346/3a1a06e6-2cfa-4773-9219-c2063e7c39f8)
 
 
-Chatter is a user-friendly chat application that enables users to send messages directly to each other in real-time. Built with React and Firebase, this app provides a seamless messaging experience with instant updates, secure authentication, and scalable data storage.
-Also this app is mobile responsive, so you can use it freely on any device (see the following images)
+Chatter is a user-friendly chat application that enables users to send messages directly to each other in real-time. Built with React and Firebase, this app provides a seamless messaging experience with instant updates, secure authentication.
 
 Note: I didn't make this website mobile responsive, however it should work fine on desktop
 
